@@ -54,11 +54,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConnectionFactorySpecs.cs" />
-    <Compile Include="Mocks\MockEntities.cs" />
+    <Compile Include="ConnectionFactorySpecs\SadPath\WhenConnectionNameIsWrong.cs" />
+    <Compile Include="ConnectionFactorySpecs\SadPath\WhenConnectionStringIsNullOrEmpty.cs" />
+    <Compile Include="ConnectionFactorySpecs\SadPath\WhenConnectionStringIsGibrish.cs" />
+    <Compile Include="ConnectionFactorySpecs\WhenTwoConnections.cs" />
+    <Compile Include="ConnectionFactorySpecs\WhenPassingConnectionString.cs" />
+    <Compile Include="ConnectionFactorySpecs\WhenPassingDefaultName.cs" />
+    <Compile Include="DatabaseSpecs\WhenQueryWithoutFilters.cs" />
+    <Compile Include="DatabaseSpecs\WhenPassingSqlDbConnection.cs" />
+    <Compile Include="MaterializerSpecs\WhenEmptyDataReader.cs" />
+    <Compile Include="MaterializerSpecs\WhenDataReaderWithCategories.cs" />
+    <Compile Include="Mocks\Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DatabaseSpecs.cs" />
-    <Compile Include="MaterializerSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snikt\Snikt.csproj">
@@ -69,6 +76,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
