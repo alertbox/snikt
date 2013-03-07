@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snikt.Specifications", "Sni
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{0AC6A5B7-6BEB-4DA9-BAB4-2481C8505022}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.txt = Readme.txt
+		Readme.md = Readme.md
 		SetupDatabase.sql = SetupDatabase.sql
 	EndProjectSection
 EndProject
