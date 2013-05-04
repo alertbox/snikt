@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 using System.Data;
-using Snikt.Specifications.Mocks;
+using Snikt.Specifications.Mocks.Poco;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,8 +15,9 @@ namespace Snikt.Specifications.MaterializerSpecs
         public void ThenCategoryShaperIsCreated()
         {
             // Build
-            SqlConnection connection = SqlConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
-            SqlCommand command = connection.CreateCommand();
+            IDbConnection connection = DbConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
+            IDbCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "dbo.GetAllCategories";
 
             // Operator
@@ -32,8 +33,9 @@ namespace Snikt.Specifications.MaterializerSpecs
         public void ThenCollectionOfCategoriesReturned()
         {
             // Build
-            SqlConnection connection = SqlConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
+            SqlConnection connection = (SqlConnection)DbConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
             SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "dbo.GetAllCategories";
 
             // Operator
@@ -54,8 +56,9 @@ namespace Snikt.Specifications.MaterializerSpecs
         public void ThenEachCategoryContainsData()
         {
             // Build
-            SqlConnection connection = SqlConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
+            SqlConnection connection = (SqlConnection)DbConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
             SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "dbo.GetAllCategories";
 
             // Operator
@@ -67,6 +70,8 @@ namespace Snikt.Specifications.MaterializerSpecs
             {
                 categories.Add(categoryMaterializer.Materialize(queryResult));
             }
+
+            // Check
             foreach (Category cat in categories)
             {
                 AssertPropertiesAreNotNull(cat.GetType(), cat);

@@ -8,26 +8,26 @@ using System.Text;
 
 namespace Snikt
 {
-    public class SqlConnectionFactory : ISqlConnectionFactory
+    public class DbConnectionFactory : IDbConnectionFactory
     {
-        public Dictionary<string, SqlConnection> Pool { get; private set; }
+        public Dictionary<string, IDbConnection> Pool { get; private set; }
 
-        protected SqlConnectionFactory()
+        protected DbConnectionFactory()
         {
-            Pool = new Dictionary<string, SqlConnection>();
+            Pool = new Dictionary<string, IDbConnection>();
         }
 
-        public static ISqlConnectionFactory Get()
+        public static IDbConnectionFactory Get()
         {
-            return new SqlConnectionFactory();
+            return new DbConnectionFactory();
         }
 
-        public SqlConnection CreateIfNotExists(string nameOrConnectionString)
+        public IDbConnection CreateIfNotExists(string nameOrConnectionString)
         {
             Assert.ThrowIfNull(nameOrConnectionString, "string nameOrConnectionString", Messages.NameOrConnectionStringNullOrEmpty);
 
             string connectionString = ParseToConnectionString(nameOrConnectionString);
-            SqlConnection connection = GetConnection(connectionString);
+            IDbConnection connection = GetConnection(connectionString);
             return connection;
         }
 
@@ -53,7 +53,7 @@ namespace Snikt
             return stringName.Replace("name=", string.Empty);
         }
 
-        private SqlConnection GetConnection(string connectionString)
+        private IDbConnection GetConnection(string connectionString)
         {
             if (NotPooled(connectionString))
             {
@@ -72,21 +72,21 @@ namespace Snikt
             return Pool.ContainsKey(connectionString);
         }
 
-        private SqlConnection CreatePooledConnection(string connectionString)
+        private IDbConnection CreatePooledConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            IDbConnection connection = new SqlConnection(connectionString);
             PoolConnection(connection);
             return connection;
         }
 
-        private void PoolConnection(SqlConnection connection)
+        private void PoolConnection(IDbConnection connection)
         {
             Pool.Add(connection.ConnectionString, connection);
         }
 
-        private SqlConnection GetPooledConnection(string connectionString)
+        private IDbConnection GetPooledConnection(string connectionString)
         {
-            SqlConnection connection = null;
+            IDbConnection connection = null;
             if (Pool.ContainsKey(connectionString))
             {
                 connection = Pool[connectionString];

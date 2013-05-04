@@ -12,7 +12,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs
         public void ThenCreateNewDatabaseConnection()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "name=DefaultConnection";
 
             // Operator

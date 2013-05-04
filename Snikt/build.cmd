@@ -1,0 +1,1 @@
+for /r %%x in (*.nuspec) do nuget pack "%%x" -prop configuration=release -includereferencedprojects

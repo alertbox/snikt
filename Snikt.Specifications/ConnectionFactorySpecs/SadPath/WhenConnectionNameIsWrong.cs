@@ -12,7 +12,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs.SadPath
         public void ThenThrowAnException()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "name=WrongConnection";
 
             // Operator

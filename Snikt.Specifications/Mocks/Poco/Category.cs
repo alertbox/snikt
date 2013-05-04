@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Snikt.Specifications.Mocks
+namespace Snikt.Specifications.Mocks.Poco
 {
     internal class Category
     {

@@ -11,7 +11,7 @@ namespace Snikt.Specifications.DatabaseSpecs
         {
             // Build
             string nameOrConnectionString = "name=DefaultConnection";
-            Database db = new Database(nameOrConnectionString);
+            IDatabase db = new Database(nameOrConnectionString, DbConnectionFactory.Get());
 
             // Operator
 

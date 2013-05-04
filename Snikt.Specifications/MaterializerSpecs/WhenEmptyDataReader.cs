@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 using System.Data;
-using Snikt.Specifications.Mocks;
+using Snikt.Specifications.Mocks.Poco;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,10 +17,10 @@ namespace Snikt.Specifications.MaterializerSpecs
         public void ThenEmptyCategoryCollectionIsReturned()
         {
             // Build
-            SqlConnection connection = SqlConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
+            SqlConnection connection = (SqlConnection)DbConnectionFactory.Get().CreateIfNotExists("name=DefaultConnection");
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "dbo.GetCategory";
             command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "dbo.GetCategory";
             command.Parameters.AddWithValue("Id", SomeCategoryId);
 
             // Operator

@@ -12,7 +12,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs
         public void ThenConnection1And2AreSame()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-CodeCamper.Web-20120601131139;";
 
             // Operator
@@ -27,7 +27,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs
         public void ThenConnection2IsPooled()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-CodeCamper.Web-20120601131139;";
 
             // Operator

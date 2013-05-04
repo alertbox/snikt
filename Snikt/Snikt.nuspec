@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/kosalanuwan/snikt#readme</projectUrl>
+    <!--
+    <iconUrl></iconUrl>
+    -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>orm micr-orm sql data dal .net35 .net40</tags>
+    <language>en-US</language>
+  </metadata>
+  <!--<files>
+    <file src="bin\Release\*.*" target="lib\net35" />
+    <file src="bin\Release\*.*" target="lib\net40" />
+  </files>-->
+</package>

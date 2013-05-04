@@ -12,7 +12,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs
         public void ThenCreateNewDatabaseConnection()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-CodeCamper.Web-20120601131139;";
 
             // Operator

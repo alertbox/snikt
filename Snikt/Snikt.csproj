@@ -11,6 +11,8 @@
     <AssemblyName>Snikt</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +44,11 @@
     <Compile Include="Assert.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DataExtensions.cs" />
+    <Compile Include="IDatabase.cs" />
     <Compile Include="Materializer.cs" />
     <Compile Include="Messages.cs" />
-    <Compile Include="SqlConnectionFactory.cs" />
-    <Compile Include="ISqlConnectionFactory.cs" />
+    <Compile Include="DbConnectionFactory.cs" />
+    <Compile Include="IDbConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

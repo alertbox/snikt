@@ -12,7 +12,7 @@ namespace Snikt.Specifications.ConnectionFactorySpecs.SadPath
         public void ThenThrowArgumentNullException()
         {
             // Build
-            ISqlConnectionFactory factory = SqlConnectionFactory.Get();
+            IDbConnectionFactory factory = DbConnectionFactory.Get();
             string nameOrConnectionString = "Gibrish connection string";
 
             // Operator

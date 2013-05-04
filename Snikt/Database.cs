@@ -7,26 +7,26 @@ using System.Text;
 
 namespace Snikt
 {
-    public class Database : IDisposable
+    public class Database : IDatabase, IDisposable
     {
-        public ISqlConnectionFactory ConnectionFactory { get; private set; }
-        public SqlConnection Connection { get; private set; }
+        public IDbConnectionFactory ConnectionFactory { get; private set; }
+        public IDbConnection Connection { get; private set; }
 
-        public Database(string nameOrConnectionString) 
+        public Database(string nameOrConnectionString)
             : this(nameOrConnectionString, CreateDefaultConnectionFactory())
         {
             // HINT: Nothing to do here.
         }
 
-        public Database(string nameOrConnectionString, ISqlConnectionFactory connectionFactory)
+        public Database(string nameOrConnectionString, IDbConnectionFactory connectionFactory)
         {
             ConnectionFactory = connectionFactory;
             Connection = ConnectionFactory.CreateIfNotExists(nameOrConnectionString);
         }
 
-        public static ISqlConnectionFactory CreateDefaultConnectionFactory()
+        public static IDbConnectionFactory CreateDefaultConnectionFactory()
         {
-            return SqlConnectionFactory.Get();
+            return DbConnectionFactory.Get();
         }
 
         public IEnumerable<T> SqlQuery<T>(string sql) where T : class, new()
@@ -36,36 +36,29 @@ namespace Snikt
 
         public IEnumerable<T> SqlQuery<T>(string sql, object parameters) where T : class, new()
         {
-            //using (SqlCommand command = Connection.CreateCommand())
-            //{
-            //    var parameterArray = parameters.GetType().GetProperties().Select(property => new { Name = property.Name, Value = property.GetValue(parameters, null) }).ToArray();
-            //    foreach (var parameter in parameterArray)
-            //    {
-            //        command.Parameters.AddWithValue(parameter.Name, parameter.Value);
-            //    }
-            //    command.CommandText = sql;
-            //    command.CommandType = CommandType.StoredProcedure;
-            //    Connection.OpenIfNot();
-            //    using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
-            //    {
-            //        while (reader.Read())
-            //        {
-            //            yield return new T();
-            //        }
-            //    }
-            //}
             return QueryInternal<T>(sql, parameters);
         }
 
         internal IEnumerable<T> QueryInternal<T>(string sql, object parameters) where T : class
         {
-            //Action<SqlCommand, object> paramReader = (command, obj) => 
-            //{
-            //    DynamicParameters mappee = new DynamicParameters(obj);
-            //    mappee.AddParameters(command, obj);
-            //};
+            // TODO: SOC/SRP violated. Wrap this logic with a different class.
+            Action<IDbCommand, object> paramReader = (command, obj) =>
+            {
+                var properties = obj.GetType()
+                    .GetProperties()
+                    .Select(property => new { Name = property.Name, Value = property.GetValue(obj, null) })
+                    .ToList();
 
-            using (SqlCommand command = SetupStoreCommand(null, sql, null, parameters, null, null))
+                foreach (var propertyMap in properties)
+                {
+                    IDbDataParameter dbparam = command.CreateParameter();
+                    dbparam.ParameterName = propertyMap.Name;
+                    dbparam.Value = propertyMap.Value;
+                    command.Parameters.Add(dbparam);
+                }
+            };
+
+            using (IDbCommand command = SetupStoredCommand(null, sql, parameters != null ? paramReader : null, parameters, null))
             {
                 Connection.OpenIfNot();
                 using (IDataReader reader = command.ExecuteReader())
@@ -79,9 +72,14 @@ namespace Snikt
             }
         }
 
-        private SqlCommand SetupStoreCommand(SqlTransaction transaction, string sql, Action<SqlCommand, object> paramReader, object obj, int? commandTimeout, CommandType? commandType)
+        private IDbCommand SetupStoredCommand(IDbTransaction transaction, string sql, Action<IDbCommand, object> paramReader, object obj, int? commandTimeout)
         {
-            SqlCommand command = Connection.CreateCommand();
+            return SetupCommand(transaction, sql, paramReader, obj, commandTimeout, CommandType.StoredProcedure);
+        }
+
+        private IDbCommand SetupCommand(IDbTransaction transaction, string sql, Action<IDbCommand, object> paramReader, object obj, int? commandTimeout, CommandType? commandType)
+        {
+            IDbCommand command = Connection.CreateCommand();
             if (transaction != null)
             {
                 command.Transaction = transaction;

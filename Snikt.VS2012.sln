@@ -5,10 +5,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snikt", "Snikt\Snikt.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snikt.Specifications", "Snikt.Specifications\Snikt.Specifications.csproj", "{121886B5-01BE-43C8-BEDF-0312EF7D32BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{0AC6A5B7-6BEB-4DA9-BAB4-2481C8505022}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".setup", ".setup", "{0AC6A5B7-6BEB-4DA9-BAB4-2481C8505022}"
+	ProjectSection(SolutionItems) = preProject
+		Snikt\build.cmd = Snikt\build.cmd
+		SetupDatabase.sql = SetupDatabase.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{83D12D7E-93B5-4006-8C0C-AEE2BE6564C4}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
-		SetupDatabase.sql = SetupDatabase.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F973B978-3AB6-454E-AEF2-630F70F4748E}"
+	ProjectSection(SolutionItems) = preProject
+		Snikt\Snikt.nuspec = Snikt\Snikt.nuspec
 	EndProjectSection
 EndProject
 Global
