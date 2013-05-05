@@ -70,10 +70,13 @@ Assert.IsTrue(categories.Any());
 ```
 
 ## OTHER RESOURCES ##
-Snikt! is created to demonstrate How to apply some of the available .NET technologies with the Data Access Layer in Layered Architecture design pattern. The main focus of the specifications is How to code the Data Access Layer? and not the actual functionality of the chosen MiniNW application.
+Snikt! is created to demonstrate How to apply some of the available .NET technologies with the Data Access Layer in Layered Architecture design pattern. The main focus of the specifications is <strong>How to code the Data Access Layer?</strong> and not the actual functionality of the chosen MiniNW application.
 
-/KP
+* Snikt! has a comprehensive test project that demonstrates <strong>How Do I</strong> in [Specifications](https://github.com/kosalanuwan/snikt/tree/master/Snikt.Specifications).
+* You can download the [Snikt! NuGet package](https://nuget.org/packages/Snikt/) from NuGet Gallery.
 
-e: kosala.nuwan@gmail.com
-t: [@kosalanuwan](https://www.twitter.com/kosalanuwan)
-b: http://kosalanuwan.tumblr.com
+
+/KP<br />
+e: kosala.nuwan@gmail.com<br />
+t: [@kosalanuwan](https://www.twitter.com/kosalanuwan)<br />
+b: http://kosalanuwan.tumblr.com<br />
