@@ -1,7 +1,9 @@
-## SNIKT! ##
+## SNIKT!
+[![Stories in Ready](https://badge.waffle.io/alertbox/snikt.svg?label=ready&title=Ready)](http://waffle.io/alertbox/snikt)
+
 Snkit! is nothing but a light-weight micro-ORM. Originally, it is the switchblade-sound of Wolverine's claws locking into place.
 
-## OVERVIEW ##
+## OVERVIEW
 I wrote Snikt! to take away the pain of data access logic.
 * It is a simple Assembly you can refer in your Data Access Layer that will provide utilities, wrappers, and extensions to simplify work in the data access objects.
 * Snikt! provides database connection lifetime management and execution store commands.
@@ -9,16 +11,16 @@ I wrote Snikt! to take away the pain of data access logic.
 * It has templates and abstract classes for business entities, data access objects, and search query arguments.
 * Snikt! has no database specific implementations. Technically, you should be able to use it on MySQL, SQL Server, or even on Oracle.
 
-## LICENSE ##
+## LICENSE
 Snikt! code is free for commercial and non-commercial deployments and distribution. Snikt! is release under [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
-## FEATURES ##
+## FEATURES
 Snikt! provides 3 simple helpers:
 * [Materializer.cs](https://github.com/kosalanuwan/snikt/blob/master/Snikt/Materializer.cs)
 * [Database.cs](https://github.com/kosalanuwan/snikt/blob/master/Snikt/Database.cs)
 * [DbConnectionFactory.cs](https://github.com/kosalanuwan/snikt/blob/master/Snikt/DbConnectionFactory.cs)
 
-### Map query results to a strong-typed list ###
+### Map query results to a strong-typed list
 ```csharp
 IDataReader queryResult = command.ExecuteReader();
 Materializer<Category> categoryMaterializer = new Materializer<Category>(queryResult);
@@ -31,7 +33,7 @@ while (queryResult.Read())
 Assert.IsTrue(categories.Any());
 ```
 
-### Execute a Stored Procedure ###
+### Execute a Stored Procedure
 ```csharp
 IDatabase db = new Database("name=DefaultConnection");
 
@@ -40,7 +42,7 @@ List<Category> categories = db.SqlQuery<Category>("dbo.GetAllCategories").ToList
 Assert.IsTrue(categories.Any());
 ```
 
-### Execute a Stored Procedure that obtain Parameters ###
+### Execute a Stored Procedure that obtain Parameters
 ```csharp
 IDatabase db = new Database("name=DefaultConnection");
 var criteria = new { Id = 1 };
@@ -53,7 +55,7 @@ foreach (Category cat in categories)
 }
 ```
 
-### Provide DbContext as the Connection ###
+### Provide DbContext as the Connection
 ```csharp
 public class DbContextConnectionFactory : IDbConnectionFactory
 {
@@ -69,7 +71,7 @@ List<Category> categories = db.SqlQuery<Category>("dbo.GetAllCategories").ToList
 Assert.IsTrue(categories.Any());
 ```
 
-## OTHER RESOURCES ##
+## OTHER RESOURCES
 Snikt! is created to demonstrate How to apply some of the available .NET technologies with the Data Access Layer in Layered Architecture design pattern. The main focus of the specifications is <strong>How to code the Data Access Layer?</strong> and not the actual functionality of the chosen MiniNW application.
 
 * Snikt! has a comprehensive test project that demonstrates <strong>How Do I</strong> in [Specifications](https://github.com/kosalanuwan/snikt/tree/master/Snikt.Specifications).
