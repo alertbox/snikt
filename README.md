@@ -1,4 +1,6 @@
 ## SNIKT!
+
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/alertbox/snikt)
 [![Gitter](https://badges.gitter.im/alertbox/snikt.svg)](https://gitter.im/alertbox/snikt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Stories in Ready](https://badge.waffle.io/alertbox/snikt.svg?label=ready&title=Ready)](http://waffle.io/alertbox/snikt)
 
